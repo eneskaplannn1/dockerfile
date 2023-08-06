@@ -1,0 +1,17 @@
+#! step 1
+FROM mcr.microsoft.com/java/jdk:8-zulu-alpine 
+
+WORKDIR /usr/src/uygulama
+COPY ./source .   
+RUN  [ "javac" ,"uygulama.java" ]
+
+
+#! step 2
+FROM   mcr.microsoft.com/java/jre:8-zulu-alpine
+WORKDIR /uygulama
+COPY --from=0 /usr/src/uygulama .
+CMD [ "java","uygulama" ]
+
+
+
+
